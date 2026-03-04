@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
+import LandingPage from "../LandingPage.jsx";
 
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 const ANTHROPIC_API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY;
@@ -477,9 +478,15 @@ function ResultView({ image, result, date, onSave, onReset, flipColor, showSave 
   );
 }
 
+function App() {
+  const [showLanding, setShowLanding] = useState(true);
+  if (showLanding) return <LandingPage onEnter={() => setShowLanding(false)} />;
+  return <Pricera />;
+}
+
 const rootEl = document.getElementById("root");
 if (rootEl) {
-  createRoot(rootEl).render(<Pricera />);
+  createRoot(rootEl).render(<App />);
 }
 
 const s = {
