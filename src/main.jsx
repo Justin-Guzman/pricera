@@ -54,13 +54,6 @@ const C = {
 };
 
 function Pricera() {
-  const [page, setPage] = useState(PAGES.SCAN);
-  const [image, setImage] = useState(null);
-  const [imageBase64, setImageBase64] = useState(null);
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [dragging, setDragging] = useState(false);
   const [finds, setFinds] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("pricera_finds") || "[]");
@@ -68,13 +61,41 @@ function Pricera() {
       return [];
     }
   });
-  const [selectedFind, setSelectedFind] = useState(null);
+  const [selectedFind, setSelectedFind] = useState(() => {
+    const id = sessionStorage.getItem("selectedFindId");
+    if (!id) return null;
+    try {
+      const all = JSON.parse(localStorage.getItem("pricera_finds") || "[]");
+      return all.find(f => String(f.id) === id) || null;
+    } catch { return null; }
+  });
+  const [page, setPage] = useState(() => {
+    const saved = sessionStorage.getItem("page");
+    if (saved === PAGES.FINDS) return PAGES.FINDS;
+    if (saved === PAGES.DETAIL && sessionStorage.getItem("selectedFindId")) return PAGES.DETAIL;
+    return PAGES.SCAN;
+  });
+  const [image, setImage] = useState(null);
+  const [imageBase64, setImageBase64] = useState(null);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [dragging, setDragging] = useState(false);
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("pricera_finds", JSON.stringify(finds));
   }, [finds]);
+
+  useEffect(() => {
+    sessionStorage.setItem("page", page);
+  }, [page]);
+
+  useEffect(() => {
+    if (selectedFind) sessionStorage.setItem("selectedFindId", String(selectedFind.id));
+    else sessionStorage.removeItem("selectedFindId");
+  }, [selectedFind]);
 
   const handleFile = (file) => {
     if (!file || !file.type.startsWith("image/")) return;
@@ -526,8 +547,9 @@ function ResultView({ image, result, date, onSave, onReset, flipColor, showSave 
 }
 
 function App() {
-  const [showLanding, setShowLanding] = useState(true);
-  if (showLanding) return <LandingPage onEnter={() => setShowLanding(false)} />;
+  const [showLanding, setShowLanding] = useState(() => !sessionStorage.getItem("entered"));
+  const enter = () => { sessionStorage.setItem("entered", "1"); setShowLanding(false); };
+  if (showLanding) return <LandingPage onEnter={enter} />;
   return <Pricera />;
 }
 
