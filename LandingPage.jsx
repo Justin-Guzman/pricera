@@ -204,8 +204,8 @@ const s = {
 
   // How it works
   howSection: { padding: "48px 24px", position: "relative", zIndex: 1 },
-  sectionEyebrow: { fontSize: 10, fontFamily: "'Syne', sans-serif", letterSpacing: "0.2em", color: C.accent, marginBottom: 12 },
-  sectionTitle: { fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800, letterSpacing: "-0.5px", marginBottom: 32, lineHeight: 1.2 },
+  sectionEyebrow: { fontSize: 10, fontFamily: "'Syne', sans-serif", letterSpacing: "0.2em", color: C.accent, marginBottom: 12, textAlign: "center" },
+  sectionTitle: { fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800, letterSpacing: "-0.5px", marginBottom: 32, lineHeight: 1.2, textAlign: "center" },
   steps: { display: "flex", flexDirection: "column", gap: 16 },
   stepCard: { background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: "20px" },
   stepTop: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 },

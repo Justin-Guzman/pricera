@@ -272,11 +272,7 @@ function Pricera() {
                   <button style={s.retakeBtn} onClick={reset}>Retake</button>
                 </>
               ) : (
-                <div style={s.loadingBox}>
-                  <div style={s.spinner} />
-                  <p style={s.loadingText}>Pricera is analyzing your find...</p>
-                  <p style={s.loadingSubtext}>Checking resale markets</p>
-                </div>
+                <SkeletonResult />
               )}
             </div>
             {error && <p style={s.errorText}>{error}</p>}
@@ -394,9 +390,60 @@ function Pricera() {
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+        .skel { background: linear-gradient(90deg, #1E1E1E 25%, #2A2A2A 50%, #1E1E1E 75%); background-size: 200% 100%; animation: shimmer 1.4s ease infinite; border-radius: 8px; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { background: #0A0A0A; }
       `}</style>
+    </div>
+  );
+}
+
+function SkeletonResult() {
+  const sk = (w, h, extra = {}) => (
+    <div className="skel" style={{ width: w, height: h, borderRadius: 8, ...extra }} />
+  );
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, animation: "fadeUp 0.3s ease" }}>
+      {/* image placeholder */}
+      <div className="skel" style={{ width: "100%", aspectRatio: "16/9", borderRadius: 16 }} />
+      {/* item card */}
+      <div style={{ background: "#141414", border: "1px solid #2A2A2A", borderRadius: 16, padding: 20 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+            {sk("40%", 10)}
+            {sk("70%", 20)}
+            {sk("50%", 10)}
+          </div>
+          <div className="skel" style={{ width: 60, height: 60, borderRadius: 12, flexShrink: 0, marginLeft: 12 }} />
+        </div>
+        {sk("80%", 10)}
+      </div>
+      {/* price card */}
+      <div style={{ background: "#141414", border: "1px solid #2A2A2A", borderRadius: 16, padding: 20, display: "flex", flexDirection: "column", gap: 10 }}>
+        {sk("35%", 10)}
+        {sk("55%", 28)}
+        {sk("100%", 3)}
+      </div>
+      {/* platforms card */}
+      <div style={{ background: "#141414", border: "1px solid #2A2A2A", borderRadius: 16, padding: 20, display: "flex", flexDirection: "column", gap: 14 }}>
+        {sk("30%", 10)}
+        {[0, 1].map(i => (
+          <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+            <div className="skel" style={{ width: 28, height: 28, borderRadius: 6, flexShrink: 0 }} />
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6 }}>
+              {sk("40%", 12)}
+              {sk("90%", 10)}
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* tip card */}
+      <div style={{ background: "rgba(0,229,160,0.05)", border: "1px solid rgba(0,229,160,0.1)", borderRadius: 16, padding: "16px 20px", display: "flex", flexDirection: "column", gap: 8 }}>
+        {sk("20%", 10)}
+        {sk("100%", 10)}
+        {sk("75%", 10)}
+      </div>
     </div>
   );
 }
