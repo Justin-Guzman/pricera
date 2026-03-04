@@ -393,7 +393,8 @@ function Pricera() {
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { background: #0A0A0A; }
       `}</style>
     </div>
   );
@@ -487,8 +488,6 @@ const s = {
     background: C.bg,
     fontFamily: "'DM Sans', sans-serif",
     color: C.text,
-    maxWidth: 480,
-    margin: "0 auto",
     position: "relative",
   },
   bgNoise: {
