@@ -207,8 +207,8 @@ const s = {
   sectionEyebrow: { fontSize: 10, fontFamily: "'Syne', sans-serif", letterSpacing: "0.2em", color: C.accent, marginBottom: 12, textAlign: "center" },
   sectionTitle: { fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800, letterSpacing: "-0.5px", marginBottom: 32, lineHeight: 1.2, textAlign: "center" },
   steps: { display: "flex", flexDirection: "column", gap: 16 },
-  stepCard: { background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: "20px" },
-  stepTop: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 },
+  stepCard: { background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: "20px", textAlign: "center" },
+  stepTop: { display: "flex", justifyContent: "center", alignItems: "center", gap: 10, marginBottom: 12 },
   stepNum: { fontFamily: "'Syne', sans-serif", fontSize: 12, color: C.textDim, letterSpacing: "0.1em" },
   stepIcon: { fontSize: 24 },
   stepTitle: { fontFamily: "'Syne', sans-serif", fontSize: 17, fontWeight: 700, marginBottom: 8 },
@@ -217,7 +217,7 @@ const s = {
   // Features
   featuresSection: { padding: "48px 24px", position: "relative", zIndex: 1 },
   featureGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 },
-  featureCard: { background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, padding: "18px 16px" },
+  featureCard: { background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, padding: "18px 16px", textAlign: "center" },
   featureIcon: { fontSize: 24, display: "block", marginBottom: 10 },
   featureTitle: { fontFamily: "'Syne', sans-serif", fontSize: 14, fontWeight: 700, marginBottom: 6 },
   featureDesc: { fontSize: 12, color: C.textMuted, lineHeight: 1.5 },
@@ -225,7 +225,7 @@ const s = {
   // Who its for
   forSection: { padding: "48px 24px", position: "relative", zIndex: 1 },
   forGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
-  forCard: { background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "14px 16px", display: "flex", alignItems: "center", gap: 10 },
+  forCard: { background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 10 },
   forEmoji: { fontSize: 22 },
   forLabel: { fontSize: 13, fontWeight: 500, color: C.textMuted },
 
